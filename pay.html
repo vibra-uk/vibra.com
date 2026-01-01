@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paystack Checkout</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu;
+      background: #f9f9f9;
+      color: #333;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    h3 {
+      color: #10b981;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      padding: 15px 10px;
+      border-top: 1px solid #eee;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .option:hover {
+      background: #f0f0f0;
+    }
+
+    .option span {
+      margin-left: 12px;
+      font-weight: 500;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .cancel {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .cancel button {
+      background: none;
+      border: 1px solid #ccc;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .loading-screen {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.9);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #10b981;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h3>PAYSTACK CHECKOUT</h3>
+    <p>Use one of the payment methods below to pay NGN 72,268.50 to VIBRA</p>
+
+    <div class="option" onclick="payWithCard()">
+      <img src="https://img.icons8.com/ios-filled/50/000000/bank-card-front-side.png" class="icon"/>
+      <span>Pay with Card</span>
+    </div>
+
+    <div class="option" onclick="payWithTransfer()">
+      <img src="https://img.icons8.com/ios-filled/50/000000/bank.png" class="icon"/>
+      <span>Pay with Transfer</span>
+    </div>
+
+    <div class="cancel">
+      <button onclick="cancel()">× Cancel Payment</button>
+    </div>
+  </div>
+
+  <div class="loading-screen" id="loader">
+    <div style="text-align: center;">
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <script>
+    function payWithCard() {
+      alert("Sorry, Card payment is temporarily unavailable. Please try another method.");
+    }
+
+    function payWithTransfer() {
+      const loader = document.getElementById('loader');
+      loader.style.display = 'flex';
+      setTimeout(() => {
+        window.location.href = "pay2.html";
+      }, 3000);
+    }
+
+    function cancel() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VIBRA – Complete Profile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+    --bg:#ffffff;
+    --card:#f8f9fc;
+    --border:#e6e8f0;
+    --text:#111;
+    --muted:#6b7280;
+    --accent:#ff4d6d;
+}
+
+*{
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x: hidden;     /* ❌ Disable horizontal scroll */
+    overflow-y: auto;       /* ✅ Allow vertical scroll only */
+    scroll-behavior: smooth;
+}
+
+header{
+    padding:16px;
+    font-size:22px;
+    font-weight:800;
+    color:var(--accent);
+    border-bottom:1px solid var(--border);
+    text-align:center;
+}
+
+.container{
+    max-width:420px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:18px;
+    margin-bottom:20px;
+}
+
+.profile-preview{
+    text-align:center;
+}
+
+.avatar{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    background:#eee;
+    margin:0 auto 10px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    color:var(--muted);
+}
+
+.avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.name{
+    font-weight:700;
+    font-size:18px;
+}
+
+.country{
+    color:var(--muted);
+    font-size:14px;
+}
+
+label{
+    font-size:13px;
+    color:var(--muted);
+    margin-top:12px;
+    display:block;
+}
+
+input,select,button{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    border:1px solid var(--border);
+    font-size:15px;
+    margin-top:6px;
+}
+
+input,select{
+    background:#fff;
+}
+
+button{
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    font-weight:700;
+    cursor:pointer;
+}
+
+button.secondary{
+    background:#111;
+}
+
+.plans{
+    display:none;
+}
+
+.plan{
+    border:2px solid var(--border);
+    border-radius:18px;
+    padding:16px;
+    margin-bottom:14px;
+    cursor:pointer;
+}
+
+.plan:hover{
+    border-color:var(--accent);
+}
+
+.plan h3{
+    margin:0;
+    font-size:18px;
+}
+
+.plan p{
+    margin:6px 0 0;
+    color:var(--muted);
+    font-size:14px;
+}
+
+.price{
+    font-size:22px;
+    font-weight:800;
+    color:var(--accent);
+    margin-top:6px;
+}
+</style>
+</head>
+
+<body>
+
+<header>VIBRA</header>
+
+<div class="container">
+
+    <!-- PROFILE SETUP -->
+    <div class="card" id="setup">
+        <div class="profile-preview">
+            <div class="avatar" id="avatarBox">Upload Photo</div>
+            <div class="name" id="previewName">Your Name</div>
+            <div class="country" id="previewCountry">Nigeria</div>
+        </div>
+
+        <label>Name</label>
+        <input id="nameInput" placeholder="Enter your name">
+
+        <label>Country</label>
+        <select id="countryInput">
+            <!-- <option>Nigeria</option> -->
+            <option>United States</option>
+            <option>United Kingdom</option>
+            <!-- <option>Canada</option> -->
+            <!-- <option>Australia</option>
+            <option>Germany</option>
+            <option>France</option> -->
+        </select>
+
+        <label>Profile Picture</label>
+        <input type="file" accept="image/*" id="photoInput">
+
+        <button onclick="saveProfile()">Save Profile</button>
+    </div>
+
+    <!-- SUBSCRIPTION -->
+    <div class="card plans" id="plans">
+        <h3 style="margin-top:0">Choose Your Plan</h3>
+
+        <div class="plan" onclick="goPlan('a')">
+            <h3>3 Months</h3>
+            <p>Unlimited chats • Full access</p>
+            <div class="price">$50</div>
+        </div>
+
+        <div class="plan" onclick="goPlan('b')">
+            <h3>12 Months</h3>
+            <p>Best value • Priority matching</p>
+            <div class="price">$100</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+const nameInput=document.getElementById("nameInput");
+const countryInput=document.getElementById("countryInput");
+const photoInput=document.getElementById("photoInput");
+const previewName=document.getElementById("previewName");
+const previewCountry=document.getElementById("previewCountry");
+const avatarBox=document.getElementById("avatarBox");
+
+nameInput.oninput=()=>previewName.textContent=nameInput.value||"Your Name";
+countryInput.onchange=()=>previewCountry.textContent=countryInput.value;
+
+photoInput.onchange=()=>{
+    const file=photoInput.files[0];
+    if(file){
+        const reader=new FileReader();
+        reader.onload=e=>{
+            avatarBox.innerHTML=`<img src="${e.target.result}">`;
+        };
+        reader.readAsDataURL(file);
+    }
+};
+
+function saveProfile(){
+    if(!nameInput.value){
+        alert("Please enter your name");
+        return;
+    }
+    document.getElementById("setup").style.display="none";
+    document.getElementById("plans").style.display="block";
+}
+
+function goPlan(type){
+    window.location.href = type==="a" ? "user-plan-a.html" : "user-plan-b.html";
+}
+</script>
+
+</body>
+</html>

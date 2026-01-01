@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VIBRA – Messages</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+    --bg:#ffffff;
+    --card:#f8f9fc;
+    --border:#e6e8f0;
+    --text:#111;
+    --muted:#6b7280;
+    --accent:#ff4d6d;
+    --unread:#fff5f7;
+}
+
+*{
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+}
+
+header{
+    padding:16px;
+    font-size:22px;
+    font-weight:800;
+    color:var(--accent);
+    border-bottom:1px solid var(--border);
+    text-align:center;
+}
+
+.inbox{
+    max-width:480px;
+    margin:auto;
+}
+
+.chat{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 16px;
+    border-bottom:1px solid var(--border);
+    cursor:pointer;
+}
+
+.chat.unread{
+    background:var(--unread);
+}
+
+.chat:hover{
+    background:#fafafa;
+}
+
+.avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ff758f,#ffb199);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-weight:800;
+    font-size:18px;
+}
+
+.details{
+    flex:1;
+}
+
+.name{
+    font-weight:700;
+    font-size:15px;
+}
+
+.message{
+    font-size:14px;
+    color:var(--muted);
+    margin-top:4px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.meta{
+    text-align:right;
+}
+
+.time{
+    font-size:12px;
+    color:var(--muted);
+}
+
+.badge{
+    margin-top:6px;
+    background:var(--accent);
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    min-width:20px;
+    height:20px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+</style>
+</head>
+
+<body>
+
+<header>VIBRA</header>
+
+<div class="inbox">
+
+<div class="chat unread" onclick="goUser()">
+    <div class="avatar">J</div>
+    <div class="details">
+        <div class="name">James</div>
+        <div class="message">yes i have the zagi</div>
+    </div>
+    <div class="meta">
+        <div class="time">2m</div>
+        <div class="badge">2</div>
+    </div>
+</div>
+
+<div class="chat unread" onclick="goUser()">
+    <div class="avatar">M</div>
+    <div class="details">
+        <div class="name">Michael</div>
+        <div class="message">I only have $300 for that</div>
+    </div>
+    <div class="meta">
+        <div class="time">6m</div>
+        <div class="badge">1</div>
+    </div>
+</div>
+
+<div class="chat unread" onclick="goUser()">
+    <div class="avatar">D</div>
+    <div class="details">
+        <div class="name">Daniel</div>
+        <div class="message">Okey i can come over to pick you up my self.</div>
+    </div>
+    <div class="meta">
+        <div class="time">10m</div>
+        <div class="badge">3</div>
+    </div>
+</div>
+
+<div class="chat" onclick="goUser()">
+    <div class="avatar">R</div>
+    <div class="details">
+        <div class="name">Ryan</div>
+        <div class="message">Are you single or married?</div>
+    </div>
+    <div class="meta">
+        <div class="time">18m</div>
+    </div>
+</div>
+
+<div class="chat unread" onclick="goUser()">
+    <div class="avatar">C</div>
+    <div class="details">
+        <div class="name">Chris</div>
+        <div class="message">$100 ?</div>
+    </div>
+    <div class="meta">
+        <div class="time">25m</div>
+        <div class="badge">1</div>
+    </div>
+</div>
+
+<div class="chat" onclick="goUser()">
+    <div class="avatar">A</div>
+    <div class="details">
+        <div class="name">Andrew</div>
+        <div class="message">Okey send me your zangi number</div>
+    </div>
+    <div class="meta">
+        <div class="time">35m</div>
+    </div>
+</div>
+
+<div class="chat unread" onclick="goUser()">
+    <div class="avatar">M</div>
+    <div class="details">
+        <div class="name">Matthew</div>
+        <div class="message">Thought I’d say hi.</div>
+    </div>
+    <div class="meta">
+        <div class="time">50m</div>
+        <div class="badge">1</div>
+    </div>
+</div>
+
+<div class="chat" onclick="goUser()">
+    <div class="avatar">J</div>
+    <div class="details">
+        <div class="name">Joshua</div>
+        <div class="message">I sent you a text on zangi</div>
+    </div>
+    <div class="meta">
+        <div class="time">1h</div>
+    </div>
+</div>
+
+<div class="chat unread" onclick="goUser()">
+    <div class="avatar">D</div>
+    <div class="details">
+        <div class="name">David</div>
+        <div class="message">NOO!</div>
+    </div>
+    <div class="meta">
+        <div class="time">1h</div>
+        <div class="badge">2</div>
+    </div>
+</div>
+
+<div class="chat" onclick="goUser()">
+    <div class="avatar">B</div>
+    <div class="details">
+        <div class="name">Brandon</div>
+        <div class="message">Would love to get to know you better.</div>
+    </div>
+    <div class="meta">
+        <div class="time">2h</div>
+    </div>
+</div>
+
+<div class="chat unread" onclick="goUser()">
+    <div class="avatar">J</div>
+    <div class="details">
+        <div class="name">Justin</div>
+        <div class="message">Vibra recommended your profile.</div>
+    </div>
+    <div class="meta">
+        <div class="time">3h</div>
+        <div class="badge">1</div>
+    </div>
+</div>
+
+<div class="chat" onclick="goUser()">
+    <div class="avatar">K</div>
+    <div class="details">
+        <div class="name">Kevin</div>
+        <div class="message">You have great energy.</div>
+    </div>
+    <div class="meta">
+        <div class="time">4h</div>
+    </div>
+</div>
+
+<div class="chat unread" onclick="goUser()">
+    <div class="avatar">T</div>
+    <div class="details">
+        <div class="name">Tyler</div>
+        <div class="message">Mind if we chat?</div>
+    </div>
+    <div class="meta">
+        <div class="time">5h</div>
+        <div class="badge">1</div>
+    </div>
+</div>
+
+<div class="chat" onclick="goUser()">
+    <div class="avatar">A</div>
+    <div class="details">
+        <div class="name">Aaron</div>
+        <div class="message">What made you join Vibra?</div>
+    </div>
+    <div class="meta">
+        <div class="time">6h</div>
+    </div>
+</div>
+
+<div class="chat unread" onclick="goUser()">
+    <div class="avatar">B</div>
+    <div class="details">
+        <div class="name">Brian</div>
+        <div class="message">Your profile feels very real.</div>
+    </div>
+    <div class="meta">
+        <div class="time">8h</div>
+        <div class="badge">2</div>
+    </div>
+</div>
+
+<div class="chat" onclick="goUser()">
+    <div class="avatar">S</div>
+    <div class="details">
+        <div class="name">Steven</div>
+        <div class="message">Just stopping by to say hi.</div>
+    </div>
+    <div class="meta">
+        <div class="time">10h</div>
+    </div>
+</div>
+
+<div class="chat unread" onclick="goUser()">
+    <div class="avatar">N</div>
+    <div class="details">
+        <div class="name">Nick</div>
+        <div class="message">Hope I’m not disturbing.</div>
+    </div>
+    <div class="meta">
+        <div class="time">1d</div>
+        <div class="badge">1</div>
+    </div>
+</div>
+
+</div>
+
+<script>
+function goUser(){
+    window.location.href="user.html";
+}
+</script>
+
+</body>
+</html>

