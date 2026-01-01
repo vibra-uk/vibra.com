@@ -27,13 +27,6 @@ body{
     overflow-x: hidden;     /* ❌ Disable horizontal scroll */
     overflow-y: auto;       /* ✅ Allow vertical scroll only */
     scroll-behavior: smooth;
-     width: 100%;
-    height: 100%;
-    overflow-x: hidden;      /* ❌ Disable horizontal scroll */
-    overflow-y: auto;        /* ✅ Only vertical scroll */
-    touch-action: pan-y;     /* ✅ Only vertical touch scroll on mobile */
-    overscroll-behavior-x: none; /* ❌ Prevent horizontal overscroll */
-    overscroll-behavior-y: contain; /* Optional: smoother vertical scrolling */
 }
 
 header{
@@ -129,6 +122,64 @@ nav div.active{
     color:var(--accent);
     font-weight:700;
 }
+/* ===== Bottom Navigation ===== */
+nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#ffffff;
+    border-top:1px solid #e6e8f0;
+    display:flex;
+    justify-content:space-around;
+    padding:10px 0 12px;
+    z-index:20;
+}
+
+/* Each nav item */
+nav div{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    font-size:11px;
+    color:#6b7280;
+    cursor:pointer;
+    min-width:64px;
+}
+
+/* Icons */
+nav svg{
+    width:20px;
+    height:20px;
+    transition:all .2s ease;
+}
+
+/* Make POST icon slightly smaller */
+nav div:nth-child(3) svg{
+    width:18px;
+    height:18px;
+}
+
+/* Active tab */
+nav div.active{
+    color:#ff3d6d;
+    font-weight:700;
+}
+
+/* Subtle tap feedback */
+nav div:active svg{
+    transform:scale(.92);
+}
+
+/* Smooth hover (desktop) */
+@media (hover:hover){
+    nav div:hover{
+        color:#ff3d6d;
+    }
+}
+
 </style>
 </head>
 
@@ -139,13 +190,38 @@ nav div.active{
 <div class="feed" id="feed"></div>
 
 <a href="./user.html">
-    <nav>
-    <div class="active">Home</div>
-    <div>Chats</div>
-    <div>Post</div>
-    <div>Settings</div>
+<nav>
+    <div class="active">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>
+        </svg>
+        Home
+    </div>
+
+    <div>
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21 6H3v12h4v4l4-4h10z"/>
+        </svg>
+        Chats
+    </div>
+
+    <div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M12 6v12M6 12h12"/>
+        </svg>
+        Post
+    </div>
+
+    <div>
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 4a3 3 0 1 1-3 3 3 3 0 0 1 3-3zm0 14a7 7 0 0 1-5.3-2.4c.03-1.75 3.5-2.7 5.3-2.7s5.27.95 5.3 2.7A7 7 0 0 1 12 20z"/>
+        </svg>
+        Settings
+    </div>
 </nav>
 </a>
+
+
 <script>
 // -------- USERS (UK / USA REALISM) --------
 const names = [
@@ -227,5 +303,3 @@ function goUser(){
 
 </body>
 </html>
-
-
