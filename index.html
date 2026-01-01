@@ -231,31 +231,126 @@ const names = [
 "Noah Walker","Mia Hall","Jack Young","Ella King","Liam Wright"
 ];
 
-const locations = ["New York, USA","Los Angeles, USA","Chicago, USA","London, UK","Manchester, UK","Birmingham, UK","Miami, USA","Austin, USA","Leeds, UK","Brooklyn, USA"];
+const locations = [
+"New York, USA","Los Angeles, USA","Chicago, USA","London, UK",
+"Manchester, UK","Birmingham, UK","Miami, USA","Austin, USA",
+"Leeds, UK","Brooklyn, USA"
+];
 
-const texts = [
-"Just moved here and honestly loving the vibe already 💕",
-"Looking for someone genuine, good energy only ✨",
-"Coffee dates > club nights, change my mind ☕",
-"Anyone else tired of small talk? Let’s connect for real.",
-"Big believer in chemistry and good conversation.",
-"Weekend plans: gym, brunch, and maybe a cute date?",
-"New to VIBRA — let’s see where this goes 😊",
-"I value honesty, laughter, and emotional intelligence.",
-"Dating should be fun, not stressful.",
-"Here for something meaningful, not games."
+// -------- HUMAN-WRITTEN POSTS (ALL UNIQUE, NO DUPLICATES) --------
+const humanThoughts = [
+"Moved cities for work and still trying to build a social circle from scratch. It’s harder than I expected.",
+"I don’t rush connections anymore. If it flows naturally, that’s what matters.",
+"Some days I miss being single, some days I miss being in love. Life is funny like that.",
+"I’m realizing peace is way more attractive than excitement these days.",
+"Still learning how to communicate what I actually feel instead of what sounds nice.",
+"Dating apps are weird but I guess real people are behind the screens.",
+"Looking for someone who’s emotionally present, not just physically available.",
+"I value consistency more than grand gestures now.",
+"Not here for drama. Life already gives enough of that.",
+"Trying to meet people without expectations — just honest conversations.",
+"I enjoy quiet moments more than loud places lately.",
+"I believe attraction grows when two people feel safe being themselves.",
+"Not perfect, not pretending to be.",
+"I like deep talks that start randomly and last hours.",
+"Learning to unlearn patterns that don’t serve me anymore.",
+"I don’t chase energy — I match it.",
+"Taking things slow feels healthier than rushing sparks.",
+"I’ve learned that chemistry without effort doesn’t last.",
+"Emotionally available is the new attractive.",
+"I’m at a point where clarity matters more than attention.",
+"Trying something new by actually being honest about what I want.",
+"I appreciate people who communicate clearly, even when it’s uncomfortable.",
+"Sometimes connection feels rare. That’s why I value it.",
+"Not interested in surface-level conversations anymore.",
+"I enjoy meaningful silence just as much as conversation.",
+"Life feels lighter when you stop forcing things.",
+"I want something calm, genuine, and intentional.",
+"I’m more self-aware now than I was a year ago.",
+"Looking for mutual effort, not perfection.",
+"I believe real connection takes time.",
+"I’ve learned to listen more and assume less.",
+"I’m attracted to emotional intelligence more than looks.",
+"I like people who are kind even when no one’s watching.",
+"I’m here to see if something real still exists.",
+"Not rushing into labels. Just seeing where things go.",
+"I value honesty, even when it’s messy.",
+"I’m in a season of choosing peace over chaos.",
+"I’ve stopped ignoring red flags — even the small ones.",
+"I enjoy conversations that don’t feel forced.",
+"I’m not here to impress anyone. Just being myself.",
+"I believe love should feel safe, not confusing.",
+"I appreciate emotional maturity more than charm.",
+"I’m learning to trust my instincts again.",
+"Not interested in games or mixed signals.",
+"I enjoy getting to know people slowly.",
+"I value effort, consistency, and clarity.",
+"I want something that feels easy, not draining.",
+"I’ve learned that silence can say a lot.",
+"I’m choosing growth over comfort.",
+"I’m open, but I’m also intentional.",
+"I believe real attraction grows with understanding.",
+"I’m here for genuine connection, nothing less.",
+"I appreciate honesty more than flattery.",
+"I want something that feels mutual.",
+"I enjoy deep conversations at random hours.",
+"I believe connection is built, not forced.",
+"I’m learning to communicate better.",
+"I value people who are emotionally present.",
+"I’m not here for temporary attention.",
+"I want something meaningful, even if it takes time.",
+"I enjoy simplicity more than excitement.",
+"I’ve learned to protect my energy.",
+"I’m attracted to authenticity.",
+"I value trust above everything.",
+"I believe love should feel calm.",
+"I’m choosing honesty over convenience.",
+"I enjoy conversations that flow naturally.",
+"I want something that feels real.",
+"I’m here to connect, not collect matches.",
+"I value emotional depth.",
+"I’m learning patience with people and myself.",
+"I appreciate effort that’s consistent.",
+"I believe connection grows with time.",
+"I’m open to something real.",
+"I enjoy meaningful conversations.",
+"I’m choosing clarity over confusion.",
+"I want something intentional.",
+"I value genuine energy.",
+"I believe real connection still exists.",
+"I’m here to explore possibilities.",
+"I appreciate honesty always.",
+"I’m learning to be present.",
+"I want something mutual."
 ];
 
 // -------- UTIL --------
 function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
 
+// Track used thoughts per person
+const usedByUser = {};
+
 // -------- POSTS --------
-const posts = Array.from({length:90},(_,i)=>({
-    id:i+1,
-    name:names[rand(0,names.length-1)],
-    location:locations[rand(0,locations.length-1)],
-    text:texts[rand(0,texts.length-1)]
-}));
+const posts = Array.from({length:90},(_,i)=>{
+    let name = names[rand(0,names.length-1)];
+
+    if(!usedByUser[name]) usedByUser[name]=[];
+
+    // Pick a thought not used by this person
+    let thought;
+    do{
+        thought = humanThoughts[rand(0,humanThoughts.length-1)];
+    }while(usedByUser[name].includes(thought));
+
+    usedByUser[name].push(thought);
+
+    return {
+        id:i+1,
+        name:name,
+        location:locations[rand(0,locations.length-1)],
+        text:thought
+    };
+});
 
 posts.sort(()=>Math.random()-0.5);
 
@@ -301,5 +396,7 @@ function goUser(){
 }
 </script>
 
+
 </body>
 </html>
+
